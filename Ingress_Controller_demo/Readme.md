@@ -1,4 +1,4 @@
-# Kubernetes Ingress & Deploying 2048 Game on EKS with AWS Load Balancer Controller
+# Kubernetes Ingress & Deploying Tic-Tac-Toe and RockPaperScissor Games on EKS with AWS Load Balancer Controller
 
 ---
 
@@ -356,7 +356,7 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 80
-      nodePort: 30080
+      nodePort: 30081
 ```
 
 **TTT NodePort Service:**
@@ -441,8 +441,8 @@ If you have a **Route53 Hosted Zone** and an **ACM Certificate**, use the follow
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: game-2048-ingress
-  namespace: 2048-game
+  name: game-ingress
+  namespace: games
   annotations:
     kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/scheme: internet-facing
@@ -452,7 +452,7 @@ metadata:
     alb.ingress.kubernetes.io/ssl-policy: ELBSecurityPolicy-TLS13-1-2-2021-06
 spec:
   rules:
-  - host: game.learnaws.today
+  - host: rps.ssrg.online
     http:
       paths:
       - path: /
@@ -462,6 +462,9 @@ spec:
             name: game-rps-service
             port:
               number: 80
+  - host: ttt.ssrg.online
+    http:
+      paths:
       - path: /
         pathType: Prefix
         backend:
@@ -471,10 +474,9 @@ spec:
               number: 80
 ```
 
-> After applying, create a **CNAME or Alias record** in Route53 pointing `game.learnaws.today` to the ALB DNS name.
+> After applying, create a **CNAME or Alias record** in Route53 pointing `ssrg.online` to the ALB DNS name.
 
 ```bash
 kubectl apply -f ingress.yaml
 ```
 
-Then visit `https://game.learnaws.today` to test.
