@@ -180,7 +180,7 @@ helm repo update eks
 ```
 
 Install the controller:
-
+2 controller LB pods as deploymentset will be created which are responsible for creating LB and TG in AWS
 ```bash
 helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
   -n kube-system \
@@ -383,7 +383,7 @@ spec:
 ---
 
 ### 4.7 — Ingress (`ingress.yaml`)
-
+After Ingress was created ALB controller pods will create Target groups and ALB based on annotation  providedin ingress yaml file
 ```yaml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
