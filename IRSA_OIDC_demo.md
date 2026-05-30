@@ -13,7 +13,6 @@
   - [3. IRSA](#3-irsa)
 - [One-liner Definitions](#one-liner-definitions)
 - [School Analogy](#school-analogy)
-- [Interview Answers](#interview-answers)
 - [The Easiest Memory Trick](#the-easiest-memory-trick)
 - [Real-World EKS Setup](#real-world-eks-setup)
   - [Scenario](#scenario)
