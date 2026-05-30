@@ -480,3 +480,8 @@ spec:
 kubectl apply -f ingress.yaml
 ```
 
+---
+Don't forget to delete the resources
+eksctl delete cluster --name dev-cluster --region us-east-1
+
+---
