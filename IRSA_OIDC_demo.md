@@ -169,18 +169,6 @@ ID Card 456  →  Lab Access
 
 That **mapping** is **IRSA**.
 
----
-
-## Interview Answers
-
-**Q: What is a Service Account?**  
-A Service Account is a Kubernetes identity used by pods.
-
-**Q: What is OIDC?**  
-OIDC is the trust mechanism that allows AWS IAM to authenticate Kubernetes Service Accounts.
-
-**Q: What is IRSA?**  
-IRSA is an EKS feature that maps a Kubernetes Service Account to an AWS IAM Role, allowing pods to securely access AWS services without access keys.
 
 ---
 
