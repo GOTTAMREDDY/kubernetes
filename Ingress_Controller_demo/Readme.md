@@ -106,7 +106,7 @@ Before you begin, ensure the following tools are installed and configured:
 Create or update your kubeconfig file so that `kubectl` can connect to your EKS cluster:
 
 ```bash
-aws eks update-kubeconfig --region ap-south-1 --name ekswithavinash
+aws eks update-kubeconfig --region ap-south-1 --name dev-cluster
 ```
 
 ---
@@ -116,7 +116,7 @@ aws eks update-kubeconfig --region ap-south-1 --name ekswithavinash
 Set your cluster name in an environment variable:
 
 ```bash
-cluster_name=ekswithavinash
+cluster_name=dev-cluster
 ```
 
 Extract the OIDC ID from your cluster:
@@ -136,7 +136,7 @@ aws iam list-open-id-connect-providers | grep $oidc_id | cut -d "/" -f4
 - **If no output is returned:** Create one with:
 
 ```bash
-eksctl utils associate-iam-oidc-provider --cluster ekswithavinash --approve
+eksctl utils associate-iam-oidc-provider --cluster dev-cluster --approve
 ```
 
 ---
@@ -159,7 +159,7 @@ aws iam create-policy \
 
 ```bash
 eksctl create iamserviceaccount \
-    --cluster=ekswithavinash \
+    --cluster=dev-cluster \
     --namespace=kube-system \
     --name=aws-load-balancer-controller \
     --attach-policy-arn=arn:aws:iam::<<account-id>>:policy/AWSLoadBalancerControllerIAMPolicy \
@@ -184,7 +184,7 @@ Install the controller:
 ```bash
 helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
   -n kube-system \
-  --set clusterName=ekswithavinash \
+  --set clusterName=dev-cluster \
   --set serviceAccount.create=false \
   --set serviceAccount.name=aws-load-balancer-controller
 ```
