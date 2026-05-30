@@ -186,7 +186,8 @@ That's the core idea. Everything else in EKS is built on top of those three conc
 ## Real-World EKS Setup
 
 ### Scenario
-
+Prerequisites : Install eksctl, kubectl, AWS CLI and create cluster.
+                Configure Access keys in AWS CLI.
 You have an EKS cluster and 3 applications:
 
 | Pod | AWS Service |
