@@ -180,7 +180,7 @@ helm repo update eks
 ```
 
 Install the controller:
-2 controller LB pods as deploymentset will be created which are responsible for creating LB and TG in AWS
+2 controller LB pods from deploymentset will be created which are responsible for creating LB and TG in AWS
 ```bash
 helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
   -n kube-system \

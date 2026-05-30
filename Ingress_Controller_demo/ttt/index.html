@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tic Tac Toe vs Bot</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial;
+        }
+        table {
+            margin: auto;
+            border-collapse: collapse;
+        }
+        td {
+            width: 100px;
+            height: 100px;
+            border: 2px solid black;
+            font-size: 50px;
+            text-align: center;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Tic Tac Toe vs Bot</h1>
+<p>You = X | Bot = O</p>
+
+<table>
+    <tr>
+        <td onclick="playerMove(this,0)"></td>
+        <td onclick="playerMove(this,1)"></td>
+        <td onclick="playerMove(this,2)"></td>
+    </tr>
+    <tr>
+        <td onclick="playerMove(this,3)"></td>
+        <td onclick="playerMove(this,4)"></td>
+        <td onclick="playerMove(this,5)"></td>
+    </tr>
+    <tr>
+        <td onclick="playerMove(this,6)"></td>
+        <td onclick="playerMove(this,7)"></td>
+        <td onclick="playerMove(this,8)"></td>
+    </tr>
+</table>
+
+<h2 id="status"></h2>
+
+<script>
+let board = ["","","","","","","","",""];
+let gameOver = false;
+
+function playerMove(cell,index){
+    if(board[index] !== "" || gameOver) return;
+
+    board[index] = "X";
+    cell.innerHTML = "X";
+
+    if(checkWinner("X")){
+        document.getElementById("status").innerText = "You Win!";
+        gameOver = true;
+        return;
+    }
+
+    if(board.every(c => c !== "")){
+        document.getElementById("status").innerText = "Draw!";
+        gameOver = true;
+        return;
+    }
+
+    botMove();
+}
+
+function botMove(){
+    let empty = [];
+
+    for(let i=0;i<board.length;i++){
+        if(board[i] === "") empty.push(i);
+    }
+
+    let move = empty[Math.floor(Math.random()*empty.length)];
+
+    board[move] = "O";
+    document.querySelectorAll("td")[move].innerHTML = "O";
+
+    if(checkWinner("O")){
+        document.getElementById("status").innerText = "Bot Wins!";
+        gameOver = true;
+        return;
+    }
+
+    if(board.every(c => c !== "")){
+        document.getElementById("status").innerText = "Draw!";
+        gameOver = true;
+    }
+}
+
+function checkWinner(player){
+    const wins = [
+        [0,1,2],[3,4,5],[6,7,8],
+        [0,3,6],[1,4,7],[2,5,8],
+        [0,4,8],[2,4,6]
+    ];
+
+    return wins.some(combo =>
+        combo.every(index => board[index] === player)
+    );
+}
+</script>
+
+</body>
+</html>
